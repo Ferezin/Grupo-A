@@ -8,17 +8,40 @@ grays	dcd		0x141414, 0x141414, 0x141414, 0x141414, 0x141414, 0x141414, 0x141414,
 		ldr		r8, =grays
 loopc
 		ldr		r0, [r1], r2
-		;		implemente seu codigo aqui
-		
-		
-		
-		
-		
-		
-		
-		str		r6, [r3], r2
-		cmp		r3, r8
-		bne		loopc
+		lsr     r4, r0, #16 
+        ror     r5, r0, #16
+        lsr     r5, r5, #24
+        ror     r6, r0, #8
+        lsr     r6, r6, #24
+
+        lsl     r5, r5, #1 
+        add     r9, r4, r5
+        add     r9, r9, r6
+        lsr     r9, r9, #2
+
+        mov     r4, r9 
+        mov     r5, r9
+        mov     r6, r9
+
+        cmp     r9, #16  
+        bmi     negativo 
+  positivo 
+        lsl     r4, r4, #16 
+        lsl     r5, r5, #8  
+        add     r4, r6, r4
+        add     r4, r4, r5
+        b       final
+  negativo 
+        lsl     r4, r4, #20 
+        lsl     r5, r5, #12 
+        lsl     r6, r6, #4  
+        add     r4, r6, r4
+        add     r4, r4, r5
+  final    
+        str     r4, [r3], r2
+        cmp     r3, r8
+        bne     loopc
+
 verify
 		ldr		r1, =grays
 		mov		r4, r1
