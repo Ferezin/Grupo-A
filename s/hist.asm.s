@@ -6,7 +6,7 @@ grays  dcd     0x141414, 0x141414, 0x141414, 0x141414, 0x141414, 0x141414, 0x141
        ldr     r3, =buffer
        mov     r7, #0xff
        ldr     r8, =grays
-looph  
+loopc  
       ldr     r0, [r1], r2
       lsr     r4, r0, #16 
       ror     r5, r0, #16
@@ -24,4 +24,4 @@ looph
       add     r11, r11, #1
       str     r11, [r3, r10]
       cmp     r1, r3
-      bne     looph
+      bne     loopc
